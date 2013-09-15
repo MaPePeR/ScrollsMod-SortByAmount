@@ -30,17 +30,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\Assembly-CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>..\..\..\ScrollsModding\TutorialCondom\Template.mod\Mono.Cecil.dll</HintPath>
+      <HintPath>..\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="ScrollsModLoader.Interfaces">
-      <HintPath>..\..\..\ScrollsModding\TutorialCondom\Template.mod\ScrollsModLoader.Interfaces.dll</HintPath>
+      <HintPath>..\ScrollsModLoader.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\ScrollsModding\TutorialCondom\Template.mod\UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>C:\Users\Matthias\AppData\Local\Mojang\Scrolls\game\Scrolls_Data\Managed\ModLoader\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
