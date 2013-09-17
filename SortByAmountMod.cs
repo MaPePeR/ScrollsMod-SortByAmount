@@ -66,7 +66,7 @@ namespace SortByAmountMod
 
 		public static int GetVersion ()
 		{
-			return 1;
+			return 2;
 		}
 
 		public static MethodDefinition[] GetHooks (TypeDefinitionCollection scrollsTypes, int version)
@@ -115,34 +115,42 @@ namespace SortByAmountMod
 					string[] strings = (string[])info.arguments [0];
 					int filterIndex = 0;
 					IList filters = (IList)cardFilterFilters.GetValue (info.target);
+
 					foreach(string s in strings) {
 						string filter = s.Trim ().ToLower ();
-						if (filter.StartsWith("a:")) {
-							string argument = s.Substring (2);
-							Match m = Regex.Match (argument, "^(\\d+)([\\+\\-]?)$");
-							if (m.Success) {
-								int amount = int.Parse (m.Groups[1].Value);
+						if (filter.Length > 0) {
+							if (filter.StartsWith ("a:")) {
 								MyFilter f;
-								switch (m.Groups[2].Value) {
-								case "+":
-									f = (Card c) => (sorter.getAmount (c) >= amount);
-									break;
-								case "-":
-									f = (Card c) => (sorter.getAmount (c) <= amount);
-									break;
-								default:
-									f = (Card c) => (sorter.getAmount (c) == amount);
-									break;
+								string argument = s.Substring (2);
+								if (argument.Length > 0) {
+									Match m = Regex.Match (argument, "^(\\d+)([\\+\\-]?)$");
+									if (m.Success) {
+										int amount = int.Parse (m.Groups [1].Value);
+
+										switch (m.Groups [2].Value) {
+										case "+":
+											f = (Card c) => (sorter.getAmount (c) >= amount);
+											break;
+										case "-":
+											f = (Card c) => (sorter.getAmount (c) <= amount);
+											break;
+										default:
+											f = (Card c) => (sorter.getAmount (c) == amount);
+											break;
+										}
+									} else {
+										//Can not parse the argument => show nothing.
+										f = (Card c) => (false);
+									}
+								} else {
+									//argument not yet specified => show everything
+									f = (Card c) => (true);
 								}
+								//Replace the "text-match"-filter with our filter.
 								filters.RemoveAt (filterIndex);
-								filters.Insert(filterIndex,  Cast(f, filterType));
-							} else {
-								Console.WriteLine ("did not match!");
+								filters.Insert (filterIndex, Cast (f, filterType));
 							}
-						} else {
-							if (filter.IndexOf(":") >= 0) {
-								filterIndex += 1;
-							}
+							filterIndex += 1;
 						}
 					}
 				}
