@@ -27,8 +27,11 @@ namespace SortByAmountMod
 		public void handleMessage (Message msg)
 		{
 			if (msg is LibraryViewMessage) {
-				cardTypeAmount = new Dictionary<int, int> ();
 				LibraryViewMessage libraryViewMessage = (LibraryViewMessage)msg;
+				if (libraryViewMessage.profileId != App.MyProfile.ProfileInfo.id) {
+					return;
+				}
+				cardTypeAmount = new Dictionary<int, int> ();
 				foreach (Card card in libraryViewMessage.cards)
 				{
 					increaseAmount (card.getCardType ().id);
