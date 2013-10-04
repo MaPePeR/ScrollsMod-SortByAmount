@@ -6,7 +6,7 @@ namespace SortByAmountMod
 	public class AmountSorter : ICommListener
 	{
 
- 		Dictionary<int, int> cardTypeAmount;
+		Dictionary<int, int> cardTypeAmount = new Dictionary<int, int> ();
 		protected void increaseAmount(int cardType) {
 			if (cardTypeAmount.ContainsKey(cardType)) {
 				cardTypeAmount [cardType] += 1;
