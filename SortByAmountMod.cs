@@ -66,7 +66,7 @@ namespace SortByAmountMod
 
 		public static int GetVersion ()
 		{
-			return 2;
+			return 3;
 		}
 
 		public static MethodDefinition[] GetHooks (TypeDefinitionCollection scrollsTypes, int version)
