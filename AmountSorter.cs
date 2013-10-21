@@ -44,6 +44,10 @@ namespace SortByAmountMod
 		}
 		public void onReconnect () {}
 
+		public void onConnect (OnConnectData data)
+		{
+			throw new NotImplementedException ();
+		}
 	}
 }
 
