@@ -73,9 +73,16 @@ namespace SortByAmountMod
 		{
 			MethodDefinition[] method;
 			method = scrollsTypes ["DeckBuilder2"].Methods.GetMethod ("Start");
-			MethodDefinition dbStart, dbSetSortMode, cardFilterInit;
+			MethodDefinition dbStart, dbSetSortMode, cardFilterInit, crafterStart;
 			if (method.Length == 1) {
 				dbStart = method [0];
+			} else {
+				return new MethodDefinition[] { };
+			}
+
+			method = scrollsTypes ["Crafter"].Methods.GetMethod ("Start");
+			if (method.Length == 1) {
+				crafterStart = method [0];
 			} else {
 				return new MethodDefinition[] { };
 			}
@@ -93,7 +100,7 @@ namespace SortByAmountMod
 			} else {
 				return new MethodDefinition[] { };
 			}
-			return new MethodDefinition[] {dbStart, dbSetSortMode, cardFilterInit};
+			return new MethodDefinition[] {dbStart, dbSetSortMode, cardFilterInit, crafterStart};
 		}
 
 		public override void BeforeInvoke (InvocationInfo info)
